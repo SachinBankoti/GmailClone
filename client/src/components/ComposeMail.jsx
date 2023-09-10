@@ -57,8 +57,8 @@ const ComposeMail = ({ openDialog, setOpenDialog }) => {
 
   const config = {
     Host: "smtp.elasticemail.com",
-    Username: "sachingmailclone123@yopmail.com",
-    Password: "602F567B69B9F43A022151F575CB1CEDAF95",
+    Username: process.env.REACT_APP_USERNAME,
+    Password: process.env.REACT_APP_PASSWORD,
     Port: 2525,
   };
 
@@ -81,7 +81,6 @@ const ComposeMail = ({ openDialog, setOpenDialog }) => {
   };
 
   const onValueChange =(e)=>{
-    // console.log({...data, [e.target.name]: e.target.value});
     setData({...data, [e.target.name]: e.target.value});
     console.log(data);
   }
