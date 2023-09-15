@@ -5,7 +5,6 @@ import SideContent from "./SideContent";
 const SideBar = ({ openDrawer }) => {
   return (
     <div>
-      SideBar
       <Drawer
         anchor="left"
         open={openDrawer}
