@@ -14,5 +14,13 @@ export const API_URLS = {
     moveEmailsToBin: {
         endpoint:'bin',
         method: 'POST'
+    },
+    toggleStarredEmail: {
+        endpoint: 'starred',
+        method: 'POST'
+    },
+    deleteEmail : {
+        endpoint:'delete',
+        method: 'DELETE'
     }
 }

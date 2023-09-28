@@ -17,7 +17,7 @@ export const getEmails = async (request, response) => {
       emails = await Email.find({ starred: true, bin: false });
     } else if (request.params.type === "bin") {
       emails = await Email.find({ bin: true });
-    } else if (request.params.type === "allmail") {
+    } else if (request.params.type === "allmails") {
       emails = await Email.find({});
     } else if (request.params.type === "inbox") {
       emails = [];
@@ -34,8 +34,30 @@ export const moveEmailsToBin = async (request, response) => {
   try {
     await Email.updateMany(
       { _id: { $in: request.body } },
-      { $set: { bin: true, starred: false, type: "" } })
-      return response.status(200).json('emails deleted successfully')
+      { $set: { bin: true, starred: false, type: "" } }
+    );
+    return response.status(200).json("emails deleted successfully");
+  } catch (error) {
+    response.status(500).json(error.message);
+  }
+};
+
+export const toggleStarredEmails = async (request, response) => {
+  try {
+    await Email.updateOne(
+      { _id: request.body.id },
+      { $set: { starred: request.body.value } }
+    );
+    return response.status(200).json("emails is starred marked");
+  } catch (error) {
+    response.status(500).json(error.message);
+  }
+};
+
+export const deleteEmails = async (request, response) => {
+  try {
+    await Email.deleteMany({ _id: { $in: request.body } });
+    return response.status(200).json("delete permanently");
   } catch (error) {
     response.status(500).json(error.message);
   }
